@@ -1,0 +1,47 @@
+.income-header {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.income-header p {
+    text-align: right;
+    color: white !important;
+    margin-bottom: 2px;
+}
+
+.budget-grid {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.card-body {
+    background-color: #484848;
+}
+
+.card-body p{
+    margin-bottom: 0px;
+    color: white !important;
+}
+
+.card-body h5 {
+    color: white !important;
+}
+
+.card-menu {
+    float: right;
+}
+
+@media screen and (max-width: 800px) {
+    .budget-grid {
+        display: grid;
+        grid-template-columns: 100%;
+        column-gap: 10px;
+        row-gap: 10px;
+    }
+}
+

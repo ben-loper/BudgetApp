@@ -1,0 +1,38 @@
+.monthly-bill-header {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.monthly-bill-header p {
+    color: white !important;
+}
+
+
+.monthly-bill-card p{
+    justify-self: center;
+    margin-bottom: 0px;
+}
+
+
+table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    
+}
+th.mat-header-cell {
+    max-width: 60px;
+}
+
+table td {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.left-column {
+    padding-left: 0px !important;
+}

@@ -1,0 +1,68 @@
+<section class="text-center container">
+    <div class="income-header">
+        <div *ngIf="monthlyIncome" class="income-card">
+            <h1 class="fw-light">{{monthlyIncome.name}}</h1>
+            <p class="lead text-muted">Income: {{monthlyIncome.amountThisMonth | currency:'USD'}}</p>
+            <p class="lead text-muted">Total Transactions: {{monthlyIncome.transactionAmount | currency:'USD'}}
+            </p>
+            <p class="lead text-muted">Leftover Amount: {{monthlyIncome.leftOverAfterTransactions |
+                currency:'USD'}}
+            </p>
+            <mat-divider></mat-divider>
+            <p class="lead text-muted">Budget Amount: {{monthlyIncome.budgetAmount | currency:'USD'}}</p>
+            <p class="lead text-muted">Leftover Income: {{monthlyIncome.remainingAmount | currency:'USD'}}
+            </p>
+        </div>
+        <div>
+            <button mat-button class="white-icon" [matMenuTriggerFor]="income_header_menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #income_header_menu="matMenu">
+                <button mat-menu-item (click)="openEditIncomeDialog()">
+                    Edit Income
+                </button>
+                <button mat-menu-item (click)="openBudgetDialog(null)">Add Budget</button>
+            </mat-menu>
+        </div>
+    </div>
+</section>
+
+<div class="album py-5">
+    <div class="container">
+        <div *ngIf="monthlyIncome" class="budget-grid">
+            <div class="card border-secondary">
+                <div class="card-body text-secondary">
+                    <h5 class="card-title">Monthly Bills</h5>
+                    <p class="card-text">{{monthlyIncome.monthlyBillsAmount | currency:'USD'}}</p>
+                    <a routerLink="/monthlyBills/{{monthlyIncome.id}}">
+                        <button mat-raised-button color="primary">View</button>
+                    </a>
+                </div>
+            </div>
+            <div class="card border-secondary" *ngFor="let budget of monthlyIncome.weeklyBudgets">
+                <div class="card-body text-secondary">
+                    <div class="card-menu">
+                        <button mat-button class="white-icon" [matMenuTriggerFor]="menu">
+                            <mat-icon>menu</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <a [routerLink]="['/budgets/', budget.id]" style="text-decoration: none">
+                                <button mat-menu-item>View</button>
+                            </a>
+                            <button mat-menu-item (click)="openBudgetDialog(budget)">Edit</button>
+                            <button mat-menu-item (click)="openDeleteDialog(budget)"
+                                style="color: white; background-color: red;">Delete</button>
+                        </mat-menu>
+                    </div>
+                    <h5 class="card-title">{{budget.name}}</h5>
+                    <p class="card-text">Starting Amount: {{budget.amountThisMonth | currency:'USD'}}</p>
+                    <p class="card-text">Amount Spent: {{budget.totalTransactionsForTheMonth | currency:'USD'}}</p>
+                    <p class="card-text">Amount Remaining: {{budget.amountRemaining | currency:'USD'}}</p>
+                    <button mat-raised-button color="accent" style="margin-top: 5px"
+                        (click)="openTransactionDialog(budget.id, budget.name)">Add
+                        Transaction</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

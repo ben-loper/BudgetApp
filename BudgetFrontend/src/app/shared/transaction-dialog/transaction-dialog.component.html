@@ -1,0 +1,24 @@
+<h4>{{title}}</h4>
+<mat-form-field appearance="fill">
+    <mat-label>Transaction name</mat-label>
+    <input matInput placeholder='Ex. Eggs' [value]="data.name ? data.name : ''" [(ngModel)]="data.name"
+        autocomplete="off">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Transaction amount</mat-label>
+    <input type="number" matInput placeholder='Ex. 3' [value]="data.amount ? data.amount : ''" [(ngModel)]="data.amount"
+        autocomplete="off">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Transaction date</mat-label>
+    <input matInput [matDatepicker]="transactionDatePicker" [formControl]="transactionDateFormControl">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="transactionDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #transactionDatePicker></mat-datepicker>
+</mat-form-field>
+
+
+<button mat-raised-button color="primary" (click)="create()">Create</button>
+<button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>

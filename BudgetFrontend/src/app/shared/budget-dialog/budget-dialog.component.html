@@ -1,0 +1,15 @@
+<h3>{{title}}</h3>
+<mat-form-field appearance="fill">
+    <mat-label>Budget name</mat-label>
+    <input matInput placeholder='Ex. My Income' [value]="data.name ? data.name : ''" [(ngModel)]="data.name"
+        autocomplete="off">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Weekly amount</mat-label>
+    <input matInput placeholder='Ex. 200' [value]="data.amount ? data.amount : ''" [(ngModel)]="data.amount"
+        autocomplete="off">
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="submit()">Submit</button>
+<button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>

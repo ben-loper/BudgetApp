@@ -1,0 +1,41 @@
+.budget-header {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.budget-header p {
+    text-align: right;
+    color: white !important;
+}
+
+
+.budget-card p{
+    margin-bottom: 0px;
+}
+
+.card-menu {
+    float: right;
+}
+
+table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    
+}
+th.mat-header-cell {
+    text-align: center;
+    max-width: 60px;
+}
+
+table td {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.left-column {
+    padding-left: 0px !important;
+}

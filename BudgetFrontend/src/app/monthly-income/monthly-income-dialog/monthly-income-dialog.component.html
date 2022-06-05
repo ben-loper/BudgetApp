@@ -1,0 +1,23 @@
+<h3>Edit Monthly Income</h3>
+<mat-form-field appearance="fill">
+    <mat-label>Income name</mat-label>
+    <input matInput placeholder='Ex. My Income' [value]="data.name ? data.name : ''" [(ngModel)]="data.name"
+        autocomplete="off">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Bi-Weekly income amount</mat-label>
+    <input type="number" matInput placeholder='Ex. 1000' [value]="data.amount ? data.amount : ''"
+        [(ngModel)]="data.amount" autocomplete="off">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Last pay date</mat-label>
+    <input matInput [matDatepicker]="lastPayDayDatePicker" [formControl]="lastPayDayFormControl" autocomplete="false">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="lastPayDayDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #lastPayDayDatePicker></mat-datepicker>
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="submit()">Submit</button>
+<button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
