@@ -9,9 +9,9 @@ namespace BudgetBackend.Repos
 {
     public class BudgetRepo : IBudgetRepo
     {
-        readonly BudgetappContext _context;
+        readonly BudgetAppContext _context;
 
-        public BudgetRepo(BudgetappContext context)
+        public BudgetRepo(BudgetAppContext context)
         {
             _context = context;
         }
@@ -40,6 +40,8 @@ namespace BudgetBackend.Repos
 
             var firstOfTheMonth = new DateTime(today.Year, today.Month, 1);
             var lastDayOfTheMonth = new DateTime(year, month, 1).AddDays(-1);
+
+            
 
             return _context.MonthlyIncomes
                 .Include(m => m.WeeklyBudgets)
@@ -97,6 +99,8 @@ namespace BudgetBackend.Repos
             var savedIncome = _context.MonthlyIncomes.Where(m => m.Id == monthlyIncome.Id).FirstOrDefault();
 
             savedIncome = monthlyIncome;
+
+            savedIncome.LastPayDay = new DateTime(savedIncome.LastPayDay.Year, savedIncome.LastPayDay.Month, savedIncome.LastPayDay.Day);
             
             _context.SaveChanges();
 
@@ -185,7 +189,7 @@ namespace BudgetBackend.Repos
 
             savedTransaction.Name = transaction.Name;
             savedTransaction.Amount = transaction.Amount;
-            savedTransaction.TransactionDate = transaction.TransactionDate;
+            savedTransaction.TransactionDate = new DateTime(transaction.TransactionDate.Year, transaction.TransactionDate.Month, transaction.TransactionDate.Day);
 
             _context.Transactions.Update(savedTransaction);
 

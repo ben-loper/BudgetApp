@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BudgetBackend.Data.Migrations
 {
     [DbContext(typeof(BudgetAppContext))]
-    [Migration("20220605205441_PostgresInitial")]
-    partial class PostgresInitial
+    [Migration("20220606015541_FixDatabaseIssues")]
+    partial class FixDatabaseIssues
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace BudgetBackend.Data.Migrations
                         .HasColumnType("money");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("MonthlyIncomeId")
                         .HasColumnType("integer");
@@ -44,12 +44,11 @@ namespace BudgetBackend.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .IsUnicode(false)
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MonthlyIncomeId");
+                    b.HasIndex(new[] { "MonthlyIncomeId" }, "IX_MonthlyBill_MonthlyIncomeId");
 
                     b.ToTable("MonthlyBill", (string)null);
                 });
@@ -66,12 +65,11 @@ namespace BudgetBackend.Data.Migrations
                         .HasColumnType("money");
 
                     b.Property<DateTime>("LastPayDay")
-                        .HasColumnType("timestamp");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .IsUnicode(false)
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
@@ -95,20 +93,19 @@ namespace BudgetBackend.Data.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasDefaultValueSql("(current_timestamp)");
+                        .HasColumnType("timestamp without time zone")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .IsUnicode(false)
                         .HasColumnType("text");
 
                     b.Property<DateTime>("TransactionDate")
-                        .HasColumnType("timestamp");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BudgetId");
+                    b.HasIndex(new[] { "BudgetId" }, "IX_Transaction_BudgetId");
 
                     b.ToTable("Transaction", (string)null);
                 });
@@ -130,14 +127,13 @@ namespace BudgetBackend.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .IsUnicode(false)
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MonthlyIncomeId");
-
                     b.HasIndex(new[] { "Id" }, "IX_Budget");
+
+                    b.HasIndex(new[] { "MonthlyIncomeId" }, "IX_WeeklyBudget_MonthlyIncomeId");
 
                     b.ToTable("WeeklyBudget", (string)null);
                 });

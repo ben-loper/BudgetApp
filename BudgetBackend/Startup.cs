@@ -54,7 +54,7 @@ namespace BudgetBackend
                 connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Require;TrustServerCertificate=True";
             }
 
-            services.AddDbContext<BudgetappContext>(options =>
+            services.AddDbContext<BudgetAppContext>(options =>
             {
                 options.UseNpgsql(connStr);
             });
@@ -71,7 +71,7 @@ namespace BudgetBackend
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BudgetappContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BudgetAppContext context)
         {
             context.Database.Migrate();
 
