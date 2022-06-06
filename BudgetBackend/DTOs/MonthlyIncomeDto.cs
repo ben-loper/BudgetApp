@@ -46,6 +46,7 @@ namespace BudgetBackend.DTOs
             }
 
             RemainingAmount = remainingAmount;
+            LeftOverAfterTransactions -= MonthlyBillsAmount;
 
             WeeklyBudgets = WeeklyBudgets.OrderBy(b => b.Name).ToList();
         }

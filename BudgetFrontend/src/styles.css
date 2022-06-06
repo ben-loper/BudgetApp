@@ -11,4 +11,6 @@ h1, h2, h3, h4 {
 
 .white-icon {
     color: white;
+    height: 35px;
+    width: 32px;
 }

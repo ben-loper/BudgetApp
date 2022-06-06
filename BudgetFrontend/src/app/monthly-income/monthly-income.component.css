@@ -12,6 +12,14 @@
     margin-bottom: 2px;
 }
 
+.action-column {
+    display: grid;
+}
+
+.flip-icon {
+    align-self: center;
+}
+
 .budget-grid {
     display: grid;
     grid-template-columns: 33% 33% 33%;

@@ -16,6 +16,7 @@ import { MonthlyIncomeDialogComponent } from './monthly-income-dialog/monthly-in
 })
 export class MonthlyIncomeComponent implements OnInit {
   monthlyIncome: MonthlyIncomeDto;
+  public flipTotals: boolean;
 
   constructor(
     private monthlyIncomeService: ApiService,
@@ -26,6 +27,12 @@ export class MonthlyIncomeComponent implements OnInit {
     this.monthlyIncomeService.getMonthlyIncomes().subscribe((response) => {
       this.monthlyIncome = response;
     });
+
+    this.flipTotals = false;
+  }
+
+  toggleTotals() {
+    this.flipTotals = !this.flipTotals;
   }
 
   openEditIncomeDialog(): void {

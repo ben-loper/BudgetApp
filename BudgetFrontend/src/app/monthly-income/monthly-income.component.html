@@ -2,18 +2,23 @@
     <div class="income-header">
         <div *ngIf="monthlyIncome" class="income-card">
             <h1 class="fw-light">{{monthlyIncome.name}}</h1>
-            <p class="lead text-muted">Income: {{monthlyIncome.amountThisMonth | currency:'USD'}}</p>
-            <p class="lead text-muted">Total Transactions: {{monthlyIncome.transactionAmount | currency:'USD'}}
-            </p>
-            <p class="lead text-muted">Leftover Amount: {{monthlyIncome.leftOverAfterTransactions |
-                currency:'USD'}}
-            </p>
-            <mat-divider></mat-divider>
-            <p class="lead text-muted">Budget Amount: {{monthlyIncome.budgetAmount | currency:'USD'}}</p>
-            <p class="lead text-muted">Leftover Income: {{monthlyIncome.remainingAmount | currency:'USD'}}
-            </p>
+            <p class="lead text-muted">Income this Month: {{monthlyIncome.amountThisMonth | currency:'USD'}}</p>
+            <span *ngIf="!flipTotals">
+                <p class="lead text-muted">Monthly Bills: -{{monthlyIncome.monthlyBillsAmount | currency:'USD'}}
+                </p>
+                <p class="lead text-muted">Total Transactions: -{{monthlyIncome.transactionAmount | currency:'USD'}}
+                </p>
+                <p class="lead text-muted">Leftover Amount: {{monthlyIncome.leftOverAfterTransactions |
+                    currency:'USD'}}
+                </p>
+            </span>
+            <span *ngIf="flipTotals">
+                <p class="lead text-muted">Budget Amount: -{{monthlyIncome.budgetAmount | currency:'USD'}}</p>
+                <p class="lead text-muted">Leftover Income: {{monthlyIncome.remainingAmount | currency:'USD'}}
+                </p>
+            </span>
         </div>
-        <div>
+        <div class="action-column">
             <button mat-button class="white-icon" [matMenuTriggerFor]="income_header_menu">
                 <mat-icon>menu</mat-icon>
             </button>
@@ -23,7 +28,11 @@
                 </button>
                 <button mat-menu-item (click)="openBudgetDialog(null)">Add Budget</button>
             </mat-menu>
+            <button mat-button class="white-icon flip-icon" (click)="toggleTotals()">
+                <mat-icon>autorenew</mat-icon>
+            </button>
         </div>
+
     </div>
 </section>
 
