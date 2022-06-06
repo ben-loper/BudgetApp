@@ -26,7 +26,6 @@ namespace BudgetBackend.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<MonthlyBill>(entity =>
             {
@@ -34,7 +33,7 @@ namespace BudgetBackend.Entities
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                entity.Property(e => e.CreatedDate).HasColumnType("timestamp");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -54,7 +53,7 @@ namespace BudgetBackend.Entities
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
-                entity.Property(e => e.LastPayDay).HasColumnType("datetime");
+                entity.Property(e => e.LastPayDay).HasColumnType("timestamp");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -69,14 +68,14 @@ namespace BudgetBackend.Entities
                 entity.Property(e => e.Amount).HasColumnType("money");
 
                 entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("timestamp")
+                    .HasDefaultValueSql("(current_timestamp)");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .IsUnicode(false);
 
-                entity.Property(e => e.TransactionDate).HasColumnType("datetime");
+                entity.Property(e => e.TransactionDate).HasColumnType("timestamp");
 
                 entity.HasOne(d => d.Budget)
                     .WithMany(p => p.Transactions)
