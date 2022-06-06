@@ -22,8 +22,9 @@ namespace BudgetBackend.Services
 
         public MonthlyIncomeDto CreateTransaction(TransactionDto transaction)
         {
-            transaction.CreatedDate = transaction.CreatedDate?.ToLocalTime();
-            transaction.TransactionDate = transaction.TransactionDate.ToLocalTime();
+            TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+            transaction.TransactionDate = TimeZoneInfo.ConvertTimeFromUtc(transaction.TransactionDate, easternZone);
+            transaction.CreatedDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.Now.ToUniversalTime(), easternZone);
 
             var newTransaction = _mapper.Map<TransactionDto, Transaction>(transaction);
 
