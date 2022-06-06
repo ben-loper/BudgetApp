@@ -56,7 +56,7 @@ namespace BudgetBackend
 
             services.AddDbContext<BudgetappContext>(options =>
             {
-                options.UseNpgsql(connStr));
+                options.UseNpgsql(connStr);
             });
 
             services.AddControllers();
