@@ -17,7 +17,7 @@ namespace BudgetBackend.DTOs
         public decimal MonthlyBillsAmount { get; set; }
         public DateTime LastPayDay { get; set; }
         public string Name { get; set; }
-        public List<WeeklyBudgetDto> WeeklyBudgets { get; set; } = new List<WeeklyBudgetDto>();
+        public List<BudgetDto> Budgets { get; set; } = new List<BudgetDto>();
         public List<MonthlyBillDto> MonthlyBills { get; set; } = new List<MonthlyBillDto>();
 
         public void CalculateValues()
@@ -27,7 +27,7 @@ namespace BudgetBackend.DTOs
             var remainingAmount = AmountThisMonth;
             LeftOverAfterTransactions = AmountThisMonth;
 
-            foreach (var budget in WeeklyBudgets)
+            foreach (var budget in Budgets)
             {
                 budget.CalculateValues();
 
@@ -48,7 +48,7 @@ namespace BudgetBackend.DTOs
             RemainingAmount = remainingAmount;
             LeftOverAfterTransactions -= MonthlyBillsAmount;
 
-            WeeklyBudgets = WeeklyBudgets.OrderBy(b => b.Name).ToList();
+            Budgets = Budgets.OrderBy(b => b.Name).ToList();
         }
 
         private void CalculateMonthlyIncomeAmount()

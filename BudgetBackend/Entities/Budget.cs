@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace BudgetBackend.Entities
 {
-    public partial class WeeklyBudget
+    public partial class Budget
     {
-        public WeeklyBudget()
+        public Budget()
         {
             Transactions = new HashSet<Transaction>();
         }
@@ -14,6 +14,7 @@ namespace BudgetBackend.Entities
         public int MonthlyIncomeId { get; set; }
         public decimal Amount { get; set; }
         public string Name { get; set; }
+        public bool IsWeekly { get; set; }
 
         public virtual MonthlyIncome MonthlyIncome { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }

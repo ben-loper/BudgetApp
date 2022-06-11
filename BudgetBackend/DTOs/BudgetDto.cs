@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BudgetBackend.DTOs
 {
-    public class WeeklyBudgetDto
+    public class BudgetDto
     {
         public int Id { get; set; }
         public int MonthlyIncomeId { get; set; }
@@ -14,11 +14,20 @@ namespace BudgetBackend.DTOs
         public decimal TotalTransactionsForTheMonth { get; set; }
         public decimal AmountRemaining { get; set; }
         public string Name { get; set; }
+        public bool IsWeekly { get; set; }
         public List<TransactionDto> Transactions { get; set; } = new List<TransactionDto>();
 
         public void CalculateValues()
         {
-            AmountThisMonth = Amount * NumberOfWeeksThisMonth();
+            if (IsWeekly)
+            {
+                AmountThisMonth = Amount * NumberOfWeeksThisMonth();
+            }
+            else
+            {
+                AmountThisMonth = Amount;
+            }
+
             AmountRemaining = AmountThisMonth;
 
             foreach (var transaction in Transactions)

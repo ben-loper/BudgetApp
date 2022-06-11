@@ -19,7 +19,7 @@ namespace BudgetBackend.Repos
         public List<MonthlyIncome> GetAllMonthlyIncomes()
         {
             return _context.MonthlyIncomes
-                .Include(m => m.WeeklyBudgets)
+                .Include(m => m.Budgets)
                 .ThenInclude(m => m.Transactions)
                 .Include(m => m.MonthlyBills)
                 .ToList();
@@ -44,7 +44,7 @@ namespace BudgetBackend.Repos
             
 
             return _context.MonthlyIncomes
-                .Include(m => m.WeeklyBudgets)
+                .Include(m => m.Budgets)
                 .ThenInclude(m => m.Transactions.Where(t => t.TransactionDate.Date >= firstOfTheMonth && t.TransactionDate.Date <= lastDayOfTheMonth))
                 .AsSplitQuery()
                 .Include(m => m.MonthlyBills)
@@ -80,13 +80,13 @@ namespace BudgetBackend.Repos
             var lastDayOfTheMonth = new DateTime(year, month, 1).AddDays(-1);
 
             var income = _context.MonthlyIncomes.Where(m => m.Id == id)
-                .Include(m => m.WeeklyBudgets)
+                .Include(m => m.Budgets)
                 .AsSplitQuery()
                 .Include(m => m.MonthlyBills)
                 .AsSplitQuery()
                 .FirstOrDefault();
 
-            foreach(var budget in income.WeeklyBudgets)
+            foreach(var budget in income.Budgets)
             {
                 budget.Transactions = _context.Transactions.Where(t => t.BudgetId == budget.Id &&  t.TransactionDate.Date >= firstOfTheMonth && t.TransactionDate.Date <= lastDayOfTheMonth).ToList();
             }
@@ -109,26 +109,27 @@ namespace BudgetBackend.Repos
             return savedIncome;
         }
 
-        public WeeklyBudget GetWeeklyBudgetById(int id)
+        public Budget GetBudgetById(int id)
         {
             var today = DateTime.Now.Date;
 
             var firstOfTheMonth = new DateTime(today.Year, today.Month, 1);
             var lastDayOfTheMonth = new DateTime(today.Year, today.Month + 1, 1).AddDays(-1);
 
-            return _context.WeeklyBudgets
+            return _context.Budgets
                 .Where(b => b.Id == id)
                 .Include(b => b.Transactions.OrderByDescending(t => t.TransactionDate)
                                             .Where(t => t.TransactionDate.Date >= firstOfTheMonth && t.TransactionDate.Date <= lastDayOfTheMonth))
                 .FirstOrDefault();
         }
 
-        public MonthlyIncome UpdateWeeklyBudget(WeeklyBudget weeklyBudget)
+        public MonthlyIncome UpdateBudget(Budget budget)
         {
-            var savedBudget = _context.WeeklyBudgets.Where(m => m.Id == weeklyBudget.Id).FirstOrDefault();
+            var savedBudget = _context.Budgets.Where(m => m.Id == budget.Id).FirstOrDefault();
 
-            savedBudget.Amount = weeklyBudget.Amount;
-            savedBudget.Name = weeklyBudget.Name;
+            savedBudget.Amount = budget.Amount;
+            savedBudget.Name = budget.Name;
+            savedBudget.IsWeekly = budget.IsWeekly;
 
             _context.SaveChanges();
 
@@ -146,7 +147,7 @@ namespace BudgetBackend.Repos
 
         public MonthlyIncome DeleteBudgetById(int id)
         {
-            var budgetToDelete = _context.WeeklyBudgets.Where(b => b.Id == id).Include(b => b.Transactions).FirstOrDefault();
+            var budgetToDelete = _context.Budgets.Where(b => b.Id == id).Include(b => b.Transactions).FirstOrDefault();
 
             var monthlyIncomeId = budgetToDelete.MonthlyIncomeId;
 
@@ -168,7 +169,7 @@ namespace BudgetBackend.Repos
         {
             MonthlyIncome income = null;
 
-            var budget = _context.WeeklyBudgets.Where(b => b.Id == transaction.BudgetId).Include(b => b.Transactions).FirstOrDefault();
+            var budget = _context.Budgets.Where(b => b.Id == transaction.BudgetId).Include(b => b.Transactions).FirstOrDefault();
             income = _context.MonthlyIncomes.Where(i => i.Id == budget.MonthlyIncomeId).FirstOrDefault();
 
             budget.Transactions.Add(transaction);
@@ -206,7 +207,7 @@ namespace BudgetBackend.Repos
 
             var transaction = _context.Transactions.Where(t => t.Id == id).FirstOrDefault();
 
-            var budget = _context.WeeklyBudgets.Where(b => b.Id == transaction.BudgetId).FirstOrDefault();
+            var budget = _context.Budgets.Where(b => b.Id == transaction.BudgetId).FirstOrDefault();
 
             var monthlyIncomeId = budget.MonthlyIncomeId;
 

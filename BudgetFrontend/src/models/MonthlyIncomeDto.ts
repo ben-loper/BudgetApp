@@ -12,6 +12,6 @@ export class MonthlyIncomeDto {
   remainingAmount: number;
   budgetAmount: number;
   monthlyBillsAmount: number;
-  weeklyBudgets: BudgetDto[];
+  budgets: BudgetDto[];
   monthlyBills: MonthlyBillDto[];
 }

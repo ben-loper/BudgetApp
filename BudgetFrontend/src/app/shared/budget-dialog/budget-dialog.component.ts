@@ -31,6 +31,7 @@ export class BudgetDialogComponent implements OnInit {
     budget.id = this.data.id;
     budget.name = this.data.name;
     budget.amount = this.data.amount;
+    budget.isWeekly = this.data.isWeekly;
 
     if (budget.id) {
       this.service.updateBudget(budget).subscribe((response) => {

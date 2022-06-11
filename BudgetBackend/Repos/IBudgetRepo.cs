@@ -15,8 +15,8 @@ namespace BudgetBackend.Repos
         public MonthlyIncome CreateMonthlyIncome(MonthlyIncome monthlyIncome);
         public MonthlyIncome UpdateMonthlyIncome(MonthlyIncome monthlyIncome);
         public void DeleteMonthlyIncome(MonthlyIncome monthlyIncome);
-        public WeeklyBudget GetWeeklyBudgetById(int id);
-        public MonthlyIncome UpdateWeeklyBudget(WeeklyBudget weeklyBudget);
+        public Budget GetBudgetById(int id);
+        public MonthlyIncome UpdateBudget(Budget weeklyBudget);
         public MonthlyIncome DeleteBudgetById(int id);
         public MonthlyIncome CreateTransaction(Transaction transaction);
         public MonthlyIncome UpdateTransaction(Transaction transaction);

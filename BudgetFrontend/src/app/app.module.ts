@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -62,6 +63,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatToolbarModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

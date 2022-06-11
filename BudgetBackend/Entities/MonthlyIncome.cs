@@ -7,8 +7,8 @@ namespace BudgetBackend.Entities
     {
         public MonthlyIncome()
         {
+            Budgets = new HashSet<Budget>();
             MonthlyBills = new HashSet<MonthlyBill>();
-            WeeklyBudgets = new HashSet<WeeklyBudget>();
         }
 
         public int Id { get; set; }
@@ -16,7 +16,7 @@ namespace BudgetBackend.Entities
         public string Name { get; set; }
         public DateTime LastPayDay { get; set; }
 
+        public virtual ICollection<Budget> Budgets { get; set; }
         public virtual ICollection<MonthlyBill> MonthlyBills { get; set; }
-        public virtual ICollection<WeeklyBudget> WeeklyBudgets { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace BudgetBackend.Mapping
         public MapperProfile()
         {
             CreateMap<MonthlyIncome, MonthlyIncomeDto>().ForMember(dest => dest.BiWeeklyAmount, opt => opt.MapFrom(src => src.Amount)).ReverseMap();
-            CreateMap<WeeklyBudget, WeeklyBudgetDto>().ReverseMap();
+            CreateMap<Budget, BudgetDto>().ReverseMap();
             CreateMap<MonthlyBill, MonthlyBillDto>().ReverseMap();
             CreateMap<Transaction, TransactionDto>().ReverseMap();
         }

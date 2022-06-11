@@ -20,26 +20,26 @@ namespace BudgetBackend.Services
             _repo = repo;
         }
 
-        public WeeklyBudgetDto GetBudgetById(int id)
+        public BudgetDto GetBudgetById(int id)
         {
-            var dto = new WeeklyBudgetDto();
+            var dto = new BudgetDto();
 
-            var savedBudget = _repo.GetWeeklyBudgetById(id);
+            var savedBudget = _repo.GetBudgetById(id);
 
-            dto = _mapper.Map<WeeklyBudget, WeeklyBudgetDto>(savedBudget);
+            dto = _mapper.Map<Budget, BudgetDto>(savedBudget);
 
             dto.CalculateValues();
 
             return dto;
         }
 
-        public MonthlyIncomeDto CreateBudget(WeeklyBudgetDto budget)
+        public MonthlyIncomeDto CreateBudget(BudgetDto budget)
         {
             var monthlyIncome = _repo.GetMonthlyIncomeById(budget.MonthlyIncomeId);
 
-            var createdBudget = _mapper.Map<WeeklyBudgetDto, WeeklyBudget>(budget);
+            var createdBudget = _mapper.Map<BudgetDto, Budget>(budget);
 
-            monthlyIncome.WeeklyBudgets.Add(createdBudget);
+            monthlyIncome.Budgets.Add(createdBudget);
 
             _repo.UpdateMonthlyIncome(monthlyIncome);
 
@@ -50,11 +50,11 @@ namespace BudgetBackend.Services
             return dto;
         }
 
-        public MonthlyIncomeDto UpdateBudget(WeeklyBudgetDto budget)
+        public MonthlyIncomeDto UpdateBudget(BudgetDto budget)
         {
-            var updatedBudget = _mapper.Map<WeeklyBudgetDto, WeeklyBudget>(budget);
+            var updatedBudget = _mapper.Map<BudgetDto, Budget>(budget);
 
-            var monthlyIncome = _repo.UpdateWeeklyBudget(updatedBudget);
+            var monthlyIncome = _repo.UpdateBudget(updatedBudget);
 
             var dto = _mapper.Map<MonthlyIncome, MonthlyIncomeDto>(monthlyIncome);
 

@@ -8,9 +8,9 @@ namespace BudgetBackend.Services
 {
     public interface IBudgetService
     {
-        public MonthlyIncomeDto CreateBudget(WeeklyBudgetDto budget);
-        public MonthlyIncomeDto UpdateBudget(WeeklyBudgetDto budget);
+        public MonthlyIncomeDto CreateBudget(BudgetDto budget);
+        public MonthlyIncomeDto UpdateBudget(BudgetDto budget);
         public MonthlyIncomeDto DeleteBudget(int id);
-        public WeeklyBudgetDto GetBudgetById(int id);
+        public BudgetDto GetBudgetById(int id);
     }
 }

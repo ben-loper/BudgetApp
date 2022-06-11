@@ -6,10 +6,15 @@
 </mat-form-field>
 
 <mat-form-field appearance="fill">
-    <mat-label>Weekly amount</mat-label>
+    <mat-label *ngIf="data.isWeekly; else monthlyBlock">Weekly amount</mat-label>
+    <ng-template #monthlyBlock>
+        <mat-label>Monthly amount</mat-label>
+    </ng-template>
     <input matInput placeholder='Ex. 200' [value]="data.amount ? data.amount : ''" [(ngModel)]="data.amount"
         autocomplete="off">
 </mat-form-field>
-
+<div style="margin-bottom: 10px">
+    <mat-checkbox class="example-margin" [(ngModel)]="data.isWeekly">Weekly</mat-checkbox>
+</div>
 <button mat-raised-button color="primary" (click)="submit()">Submit</button>
 <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>

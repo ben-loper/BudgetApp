@@ -16,10 +16,10 @@ namespace BudgetBackend.Entities
         {
         }
 
+        public virtual DbSet<Budget> Budgets { get; set; }
         public virtual DbSet<MonthlyBill> MonthlyBills { get; set; }
         public virtual DbSet<MonthlyIncome> MonthlyIncomes { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
-        public virtual DbSet<WeeklyBudget> WeeklyBudgets { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,6 +32,27 @@ namespace BudgetBackend.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Budget>(entity =>
+            {
+                entity.ToTable("Budget");
+
+                entity.HasIndex(e => e.Id, "IX_Budget");
+
+                entity.HasIndex(e => e.MonthlyIncomeId, "IX_WeeklyBudget_MonthlyIncomeId");
+
+                entity.Property(e => e.Amount).HasColumnType("money");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.MonthlyIncome)
+                    .WithMany(p => p.Budgets)
+                    .HasForeignKey(d => d.MonthlyIncomeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Budget_MonthlyIncome");
+            });
+
             modelBuilder.Entity<MonthlyBill>(entity =>
             {
                 entity.ToTable("MonthlyBill");
@@ -87,27 +108,6 @@ namespace BudgetBackend.Entities
                     .HasForeignKey(d => d.BudgetId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Transaction_Budget");
-            });
-
-            modelBuilder.Entity<WeeklyBudget>(entity =>
-            {
-                entity.ToTable("WeeklyBudget");
-
-                entity.HasIndex(e => e.Id, "IX_Budget");
-
-                entity.HasIndex(e => e.MonthlyIncomeId, "IX_WeeklyBudget_MonthlyIncomeId");
-
-                entity.Property(e => e.Amount).HasColumnType("money");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.MonthlyIncome)
-                    .WithMany(p => p.WeeklyBudgets)
-                    .HasForeignKey(d => d.MonthlyIncomeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Budget_MonthlyIncome");
             });
 
             OnModelCreatingPartial(modelBuilder);

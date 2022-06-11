@@ -20,19 +20,19 @@ namespace BudgetBackend.Controllers
         }
 
         [HttpPost]
-        public MonthlyIncomeDto Create(WeeklyBudgetDto weeklyBudget)
+        public MonthlyIncomeDto Create(BudgetDto budget)
         {
-            return _service.CreateBudget(weeklyBudget);
+            return _service.CreateBudget(budget);
         }
 
         [HttpPut]
-        public MonthlyIncomeDto Update(WeeklyBudgetDto weeklyBudget)
+        public MonthlyIncomeDto Update(BudgetDto budget)
         {
-            return _service.UpdateBudget(weeklyBudget);
+            return _service.UpdateBudget(budget);
         }
 
         [HttpGet("{id:int}")]
-        public WeeklyBudgetDto Get(int id)
+        public BudgetDto Get(int id)
         {
             return _service.GetBudgetById(id);
         }

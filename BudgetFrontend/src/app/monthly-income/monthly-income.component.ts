@@ -63,6 +63,7 @@ export class MonthlyIncomeComponent implements OnInit {
           monthlyIncomeId: this.monthlyIncome.id,
           name: budget.name,
           amount: budget.amount,
+          isWeekly: budget.isWeekly,
           id: budget.id,
         },
       });

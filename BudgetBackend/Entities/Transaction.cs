@@ -12,6 +12,6 @@ namespace BudgetBackend.Entities
         public DateTime TransactionDate { get; set; }
         public string Name { get; set; }
 
-        public virtual WeeklyBudget Budget { get; set; }
+        public virtual Budget Budget { get; set; }
     }
 }

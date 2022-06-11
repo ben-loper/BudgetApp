@@ -76,6 +76,7 @@ export class BudgetComponent implements OnInit {
         name: budget.name,
         amount: budget.amount,
         id: budget.id,
+        isWeekly: budget.isWeekly,
       },
     });
 
@@ -139,9 +140,9 @@ export class BudgetComponent implements OnInit {
   }
 
   updateBudgetDisplay(income: MonthlyIncomeDto) {
-    for (let i = 0; i < income.weeklyBudgets.length; i++) {
-      if (income.weeklyBudgets[i].id === this.budget.id) {
-        this.budget = income.weeklyBudgets[i];
+    for (let i = 0; i < income.budgets.length; i++) {
+      if (income.budgets[i].id === this.budget.id) {
+        this.budget = income.budgets[i];
         this.dataSource.data = this.budget.transactions;
         break;
       }

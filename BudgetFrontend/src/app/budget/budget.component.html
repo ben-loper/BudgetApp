@@ -2,7 +2,7 @@
     <div class="budget-header">
         <div *ngIf="budget" class="budget-card">
             <h1 class="fw-light">{{budget.name}}</h1>
-            <p class="lead text-muted">Weekly Amount: {{budget.amount | currency:'USD'}}</p>
+            <p class="lead text-muted" *ngIf="budget.isWeekly">Weekly Amount: {{budget.amount | currency:'USD'}}</p>
             <p class="lead text-muted">Amount this Month: {{budget.amountThisMonth | currency:'USD'}}</p>
             <mat-divider></mat-divider>
             <p class="lead text-muted">Amount Spent: {{budget.totalTransactionsForTheMonth | currency:'USD'}}</p>
