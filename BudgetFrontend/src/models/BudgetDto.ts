@@ -7,6 +7,7 @@ export class BudgetDto {
   amountThisMonth: number;
   name: string;
   isWeekly: boolean;
+  isMisc: boolean;
   totalTransactionsForTheMonth: number;
   amountRemaining: number;
   transactions: TransactionDto[];

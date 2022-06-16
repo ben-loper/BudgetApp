@@ -13,7 +13,7 @@
                 <mat-icon>menu</mat-icon>
             </button>
             <mat-menu #budget_header_menu="matMenu">
-                <button mat-menu-item (click)="openBudgetDialog(budget)">
+                <button *ngIf="!budget.isMisc" mat-menu-item (click)="openBudgetDialog(budget)">
                     Edit Budget
                 </button>
                 <button mat-menu-item (click)="openTransactionDialog({budgetId: budget.id})">

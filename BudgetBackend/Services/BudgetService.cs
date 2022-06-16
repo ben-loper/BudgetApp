@@ -26,9 +26,20 @@ namespace BudgetBackend.Services
 
             var savedBudget = _repo.GetBudgetById(id);
 
-            dto = _mapper.Map<Budget, BudgetDto>(savedBudget);
+            if (savedBudget.IsMisc)
+            {
+                var monthlyIncome = _repo.GetMonthlyIncomeById(savedBudget.MonthlyIncomeId);
+                var income = _mapper.Map<MonthlyIncome, MonthlyIncomeDto>(monthlyIncome);
+                income.CalculateValues();
 
-            dto.CalculateValues();
+                dto = income.Budgets.Where(b => b.Id == id).FirstOrDefault();
+            }
+            else
+            {
+                dto = _mapper.Map<Budget, BudgetDto>(savedBudget);
+
+                dto.CalculateValues();
+            }
 
             return dto;
         }

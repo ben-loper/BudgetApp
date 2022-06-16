@@ -15,6 +15,7 @@ namespace BudgetBackend.DTOs
         public decimal AmountRemaining { get; set; }
         public string Name { get; set; }
         public bool IsWeekly { get; set; }
+        public bool IsMisc { get; set; }
         public List<TransactionDto> Transactions { get; set; } = new List<TransactionDto>();
 
         public void CalculateValues()

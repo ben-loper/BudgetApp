@@ -58,8 +58,9 @@
                             <a [routerLink]="['/budgets/', budget.id]" style="text-decoration: none">
                                 <button mat-menu-item>View</button>
                             </a>
-                            <button mat-menu-item (click)="openBudgetDialog(budget)">Edit</button>
-                            <button mat-menu-item (click)="openDeleteDialog(budget)"
+                            <button *ngIf="!budget.isMisc" mat-menu-item
+                                (click)="openBudgetDialog(budget)">Edit</button>
+                            <button *ngIf="!budget.isMisc" mat-menu-item (click)="openDeleteDialog(budget)"
                                 style="color: white; background-color: red;">Delete</button>
                         </mat-menu>
                     </div>

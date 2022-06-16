@@ -15,6 +15,7 @@ namespace BudgetBackend.Entities
         public decimal Amount { get; set; }
         public string Name { get; set; }
         public bool IsWeekly { get; set; }
+        public bool IsMisc { get; set; }
 
         public virtual MonthlyIncome MonthlyIncome { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }

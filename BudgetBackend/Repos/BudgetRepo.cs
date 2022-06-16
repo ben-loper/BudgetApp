@@ -114,7 +114,7 @@ namespace BudgetBackend.Repos
             var today = DateTime.Now.Date;
 
             var firstOfTheMonth = new DateTime(today.Year, today.Month, 1);
-            var lastDayOfTheMonth = new DateTime(today.Year, today.Month + 1, 1).AddDays(-1);
+            var lastDayOfTheMonth = new DateTime(today.Year, today.Month + 1, 1).AddDays(-1); 
 
             return _context.Budgets
                 .Where(b => b.Id == id)

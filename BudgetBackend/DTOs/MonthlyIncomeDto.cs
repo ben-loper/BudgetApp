@@ -27,7 +27,7 @@ namespace BudgetBackend.DTOs
             var remainingAmount = AmountThisMonth;
             LeftOverAfterTransactions = AmountThisMonth;
 
-            foreach (var budget in Budgets)
+            foreach (var budget in Budgets.Where(b => !b.IsMisc))
             {
                 budget.CalculateValues();
 
@@ -47,6 +47,18 @@ namespace BudgetBackend.DTOs
 
             RemainingAmount = remainingAmount;
             LeftOverAfterTransactions -= MonthlyBillsAmount;
+
+
+            // Calculate misc budget data
+            var miscBudget = Budgets.Where(b => b.IsMisc).FirstOrDefault();
+
+            miscBudget.Amount = remainingAmount;
+            miscBudget.AmountThisMonth = remainingAmount;
+            miscBudget.IsWeekly = false;
+            miscBudget.CalculateValues();
+
+            TransactionAmount += miscBudget.TotalTransactionsForTheMonth;
+            LeftOverAfterTransactions -= miscBudget.TotalTransactionsForTheMonth;
 
             Budgets = Budgets.OrderBy(b => b.Name).ToList();
         }
