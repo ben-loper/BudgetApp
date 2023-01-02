@@ -51,12 +51,23 @@ namespace BudgetBackend.Repos
 
             if (monthlyIncome == null)
             {
-                CreateMonthlyIncome(new MonthlyIncome()
+                var newIncome = CreateMonthlyIncome(new MonthlyIncome()
                 {
                     Amount = 1000,
                     Name = "Dode and Ben",
                     LastPayDay = today
                 });
+
+                var miscBudget = new Budget() 
+                { 
+                    Name = "Misc Budget",
+                    MonthlyIncomeId = newIncome.Id,
+                    IsWeekly = false,
+                    IsMisc = true
+                };
+
+                _context.Add(miscBudget);
+                _context.SaveChanges();
             }
 
             return _context.MonthlyIncomes
