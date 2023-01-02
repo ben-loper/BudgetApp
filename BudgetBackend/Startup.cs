@@ -51,6 +51,8 @@ namespace BudgetBackend
                 var pgHost = pgHostPort.Split(":")[0];
                 var pgPort = pgHostPort.Split(":")[1];
 
+                Console.WriteLine(pgDb);
+
                 connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
             }
 
