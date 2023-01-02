@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MonthlyIncomeUpdateDto } from 'src/models/MonthlyIncomeUpdateDto';
 import { ApiService } from 'src/services/MonthlyIncomeService';
@@ -24,13 +24,13 @@ export class MonthlyIncomeDialogComponent implements OnInit {
   ) {}
 
   private income: MonthlyIncomeUpdateDto;
-  lastPayDayFormControl: FormControl;
+  lastPayDayFormControl: UntypedFormControl;
 
   ngOnInit() {
     if (this.data.id) {
-      this.lastPayDayFormControl = new FormControl(this.data.lastPayDay);
+      this.lastPayDayFormControl = new UntypedFormControl(this.data.lastPayDay);
     } else {
-      this.lastPayDayFormControl = new FormControl(new Date());
+      this.lastPayDayFormControl = new UntypedFormControl(new Date());
     }
   }
 

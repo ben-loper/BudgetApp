@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Form, FormControl } from '@angular/forms';
+import { Form, UntypedFormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TransactionDto } from 'src/models/TransactionDto';
 import { ApiService } from 'src/services/MonthlyIncomeService';
@@ -27,22 +27,22 @@ export class TransactionDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: ITransactionDialogData,
     private service: ApiService
   ) {}
-  createdDateFormControl: FormControl;
-  transactionDateFormControl: FormControl;
+  createdDateFormControl: UntypedFormControl;
+  transactionDateFormControl: UntypedFormControl;
 
   ngOnInit(): void {
     if (this.data.createdDate) {
-      this.createdDateFormControl = new FormControl(this.data.createdDate);
+      this.createdDateFormControl = new UntypedFormControl(this.data.createdDate);
     } else {
-      this.createdDateFormControl = new FormControl(new Date());
+      this.createdDateFormControl = new UntypedFormControl(new Date());
     }
 
     if (this.data.transactionDate) {
-      this.transactionDateFormControl = new FormControl(
+      this.transactionDateFormControl = new UntypedFormControl(
         this.data.transactionDate
       );
     } else {
-      this.transactionDateFormControl = new FormControl(new Date());
+      this.transactionDateFormControl = new UntypedFormControl(new Date());
     }
 
     if (this.data.name) {
