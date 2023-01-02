@@ -48,6 +48,15 @@
                     </a>
                 </div>
             </div>
+            <div class="card border-secondary">
+                <div class="card-body text-secondary">
+                    <h5 class="card-title">Loans</h5>
+                    <p class="card-text">{{monthlyIncome.monthlyBillsAmount | currency:'USD'}}</p>
+                    <a routerLink="/monthlyBills/{{monthlyIncome.id}}">
+                        <button mat-raised-button color="primary">View</button>
+                    </a>
+                </div>
+            </div>
             <div class="card border-secondary" *ngFor="let budget of monthlyIncome.budgets">
                 <div class="card-body text-secondary">
                     <div class="card-menu">

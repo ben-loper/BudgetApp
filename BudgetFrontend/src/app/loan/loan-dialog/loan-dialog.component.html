@@ -1,0 +1,29 @@
+<h3>{{title}}</h3>
+<mat-form-field appearance="fill">
+    <mat-label>Loan name</mat-label>
+    <input matInput placeholder='Ex. My loan' [value]="data.name ? data.name : ''" [(ngModel)]="data.name"
+        autocomplete="off">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Loan monthly amount</mat-label>
+    <input matInput placeholder='Ex. 200' [value]="data.monthlyAmount ? data.monthlyAmount : ''"
+        [(ngModel)]="data.monthlyAmount" autocomplete="off">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Day of month due</mat-label>
+    <input matInput placeholder='Ex. 200' [value]="data.dayOfMonthDue ? data.dayOfMonthDue : ''"
+        [(ngModel)]="data.dayOfMonthDue" autocomplete="off">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Last paid date</mat-label>
+    <input matInput [matDatepicker]="lastPaidDatePicker" [formControl]="lastPaidDateFormControl" autocomplete="false">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="lastPaidDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #lastPaidDatePicker></mat-datepicker>
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="submit()">Submit</button>
+<button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>

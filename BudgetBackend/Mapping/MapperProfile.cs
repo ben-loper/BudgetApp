@@ -16,6 +16,7 @@ namespace BudgetBackend.Mapping
             CreateMap<Budget, BudgetDto>().ReverseMap();
             CreateMap<MonthlyBill, MonthlyBillDto>().ReverseMap();
             CreateMap<Transaction, TransactionDto>().ReverseMap();
+            CreateMap<Loan, LoanDto>().ReverseMap();
         }
     }
 }

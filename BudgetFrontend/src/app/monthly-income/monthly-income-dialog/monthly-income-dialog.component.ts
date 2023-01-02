@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MonthlyIncomeDto } from 'src/models/MonthlyIncomeDto';
 import { MonthlyIncomeUpdateDto } from 'src/models/MonthlyIncomeUpdateDto';
 import { ApiService } from 'src/services/MonthlyIncomeService';
 

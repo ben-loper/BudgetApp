@@ -17,6 +17,7 @@ namespace BudgetBackend.Entities
         }
 
         public virtual DbSet<Budget> Budgets { get; set; }
+        public virtual DbSet<Loan> Loans { get; set; }
         public virtual DbSet<MonthlyBill> MonthlyBills { get; set; }
         public virtual DbSet<MonthlyIncome> MonthlyIncomes { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
@@ -26,7 +27,7 @@ namespace BudgetBackend.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Server=localhost; Port=5432; User Id=appuser; Password=postgres; Database=BudgetApp;");
+                optionsBuilder.UseNpgsql("Server=localhost; Port=5432; User Id=postgres; Password=postgres; Database=BudgetApp;");
             }
         }
 
@@ -51,6 +52,33 @@ namespace BudgetBackend.Entities
                     .HasForeignKey(d => d.MonthlyIncomeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Budget_MonthlyIncome");
+            });
+
+            modelBuilder.Entity<Loan>(entity =>
+            {
+                entity.ToTable("Loan");
+
+                entity.Property(e => e.Id).UseIdentityAlwaysColumn();
+
+                entity.Property(e => e.DayOfMonthDue).HasDefaultValueSql("1");
+
+                entity.Property(e => e.LastPaidDate)
+                    .HasColumnType("timestamp without time zone")
+                    .HasDefaultValueSql("CURRENT_DATE");
+
+                entity.Property(e => e.MonthlyAmount).HasColumnType("money");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnType("character varying");
+
+                entity.Property(e => e.StartingAmount).HasColumnType("money");
+
+                entity.HasOne(d => d.MonthlyIncome)
+                    .WithMany(p => p.Loans)
+                    .HasForeignKey(d => d.MonthlyIncomeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("MonthlyIncomeId");
             });
 
             modelBuilder.Entity<MonthlyBill>(entity =>

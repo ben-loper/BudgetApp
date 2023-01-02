@@ -47,6 +47,8 @@ namespace BudgetBackend.Repos
                 .AsSplitQuery()
                 .Include(m => m.MonthlyBills)
                 .AsSplitQuery()
+                .Include(m => m.Loans)
+                .AsSplitQuery()
                 .FirstOrDefault();
         }
 

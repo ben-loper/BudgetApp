@@ -1,4 +1,5 @@
 import { BudgetDto } from './BudgetDto';
+import { LoanDto } from './LoanDto';
 import { MonthlyBillDto } from './MonthlyBillDto';
 
 export class MonthlyIncomeDto {
@@ -14,4 +15,5 @@ export class MonthlyIncomeDto {
   monthlyBillsAmount: number;
   budgets: BudgetDto[];
   monthlyBills: MonthlyBillDto[];
+  loans: LoanDto[];
 }

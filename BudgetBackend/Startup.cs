@@ -78,6 +78,7 @@ namespace BudgetBackend
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                context.Database.Migrate();
             }
             else
             {

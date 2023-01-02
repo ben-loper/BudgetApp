@@ -29,6 +29,8 @@ import { ToolBarComponent } from './shared/tool-bar/tool-bar.component';
 import { MonthlyBillComponent } from './monthly-bill/monthly-bill.component';
 import { MonthlyBillDialogComponent } from './monthly-bill/monthly-bill-dialog/monthly-bill-dialog.component';
 import { MatSortModule } from '@angular/material/sort';
+import { LoanComponent } from './loan/loan.component';
+import { LoanDialogComponent } from './loan/loan-dialog/loan-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { MatSortModule } from '@angular/material/sort';
     ToolBarComponent,
     MonthlyBillComponent,
     MonthlyBillDialogComponent,
+    LoanComponent,
+    LoanDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ namespace BudgetBackend.Entities
         public MonthlyIncome()
         {
             Budgets = new HashSet<Budget>();
+            Loans = new HashSet<Loan>();
             MonthlyBills = new HashSet<MonthlyBill>();
         }
 
@@ -17,6 +18,7 @@ namespace BudgetBackend.Entities
         public DateTime LastPayDay { get; set; }
 
         public virtual ICollection<Budget> Budgets { get; set; }
+        public virtual ICollection<Loan> Loans { get; set; }
         public virtual ICollection<MonthlyBill> MonthlyBills { get; set; }
     }
 }

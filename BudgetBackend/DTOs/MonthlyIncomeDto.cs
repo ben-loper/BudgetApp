@@ -15,10 +15,12 @@ namespace BudgetBackend.DTOs
         public decimal TransactionAmount { get; set; }
         public decimal LeftOverAfterTransactions { get; set; }
         public decimal MonthlyBillsAmount { get; set; }
+        public decimal LoansAmount { get; set; }
         public DateTime LastPayDay { get; set; }
         public string Name { get; set; }
         public List<BudgetDto> Budgets { get; set; } = new List<BudgetDto>();
         public List<MonthlyBillDto> MonthlyBills { get; set; } = new List<MonthlyBillDto>();
+        public List<LoanDto> Loans { get; set; } = new List<LoanDto>();
 
         public void CalculateValues()
         {
@@ -45,9 +47,19 @@ namespace BudgetBackend.DTOs
                 MonthlyBillsAmount += monthlyBill.Amount;
             }
 
+            foreach(var loan in Loans)
+            {
+                if (loan.AmountRemaining > 0)
+                {
+                    remainingAmount -= loan.AmountRemaining;
+                    BudgetAmount += loan.MonthlyAmount;
+                    LoansAmount += loan.MonthlyAmount;
+                }                
+            }
+
             RemainingAmount = remainingAmount;
             LeftOverAfterTransactions -= MonthlyBillsAmount;
-
+            LeftOverAfterTransactions -= LoansAmount;
 
             // Calculate misc budget data
             var miscBudget = Budgets.Where(b => b.IsMisc).FirstOrDefault();

@@ -8,6 +8,7 @@ import { MonthlyIncomeUpdateDto } from 'src/models/MonthlyIncomeUpdateDto';
 import { IDeleteDialogData } from 'src/app/shared/delete-confirm-dialog/delete-confirm-dialog.component';
 import { MonthlyBillDto } from 'src/models/MonthlyBillDto';
 import { environment } from 'src/environments/environment';
+import { LoanDto } from 'src/models/LoanDto';
 
 @Injectable({
   providedIn: 'root',
@@ -84,5 +85,23 @@ export class ApiService {
       `${environment.apiUrl}/Transaction`,
       transaction
     );
+  }
+
+  getLoansForMonthlyIncomeById(id: number): Observable<LoanDto[]> {
+    return this.http.get<LoanDto[]>(
+      `${environment.apiUrl}/MonthlyIncome/${id}/Loans`
+    );
+  }
+
+  getLoanById(id: number): Observable<LoanDto> {
+    return this.http.get<LoanDto>(`${environment.apiUrl}/Loan/${id}`);
+  }
+
+  createLoan(loan: LoanDto): Observable<LoanDto> {
+    return this.http.post<LoanDto>(`${environment.apiUrl}/Loan`, loan);
+  }
+
+  updateLoan(loan: LoanDto): Observable<LoanDto> {
+    return this.http.put<LoanDto>(`${environment.apiUrl}/Loan`, loan);
   }
 }
