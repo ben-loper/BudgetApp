@@ -41,7 +41,23 @@ namespace BudgetBackend.Repos
             var firstOfTheMonth = new DateTime(today.Year, today.Month, 1);
             var lastDayOfTheMonth = new DateTime(year, month, 1).AddDays(-1);
 
-            
+            var monthlyIncome = _context.MonthlyIncomes
+                .Include(m => m.Budgets)
+                .ThenInclude(m => m.Transactions.Where(t => t.TransactionDate.Date >= firstOfTheMonth && t.TransactionDate.Date <= lastDayOfTheMonth))
+                .AsSplitQuery()
+                .Include(m => m.MonthlyBills)
+                .AsSplitQuery()
+                .FirstOrDefault();
+
+            if (monthlyIncome == null)
+            {
+                CreateMonthlyIncome(new MonthlyIncome()
+                {
+                    Amount = 1000,
+                    Name = "Dode and Ben",
+                    LastPayDay = today
+                });
+            }
 
             return _context.MonthlyIncomes
                 .Include(m => m.Budgets)
