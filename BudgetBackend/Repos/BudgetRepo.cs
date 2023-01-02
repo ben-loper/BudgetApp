@@ -58,10 +58,17 @@ namespace BudgetBackend.Repos
                     LastPayDay = today
                 });
 
-                var miscBudget = new Budget() 
-                { 
+                
+            }
+
+            var miscBudget = monthlyIncome.Budgets.Where(b => b.IsMisc).FirstOrDefault();
+
+            if (miscBudget == null)
+            {
+                miscBudget = new Budget()
+                {
                     Name = "Misc Budget",
-                    MonthlyIncomeId = newIncome.Id,
+                    MonthlyIncomeId = monthlyIncome.Id,
                     IsWeekly = false,
                     IsMisc = true
                 };
