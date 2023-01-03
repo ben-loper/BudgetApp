@@ -25,5 +25,6 @@ namespace BudgetBackend.Repos
         public List<MonthlyBill> GetMonthlyBillByMonthlyIncomeId(int id);
         public List<MonthlyBill> UpdateMonthlyBill(MonthlyBill monthlyBill);
         public List<MonthlyBill> DeleteMonthlyBillById(int id);
+        public List<Loan> GetLoansByMonthlyIncomeId(int id);
     }
 }

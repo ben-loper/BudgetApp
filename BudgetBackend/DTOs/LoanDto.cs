@@ -6,7 +6,6 @@ namespace BudgetBackend.DTOs
     {
         public int Id { get; set; }
         public decimal StartingAmount { get; set; }
-        public int DayOfMonthDue { get; set; }
         public decimal MonthlyAmount { get; set; }
         public int MonthlyIncomeId { get; set; }
         public DateTime LastPaidDate { get; set; }

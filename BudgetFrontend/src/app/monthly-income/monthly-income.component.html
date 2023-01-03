@@ -51,8 +51,8 @@
             <div class="card border-secondary">
                 <div class="card-body text-secondary">
                     <h5 class="card-title">Loans</h5>
-                    <p class="card-text">{{monthlyIncome.monthlyBillsAmount | currency:'USD'}}</p>
-                    <a routerLink="/monthlyBills/{{monthlyIncome.id}}">
+                    <p class="card-text">{{monthlyIncome.loansAmount | currency:'USD'}}</p>
+                    <a routerLink="/monthlyIncome/{{monthlyIncome.id}}/loans">
                         <button mat-raised-button color="primary">View</button>
                     </a>
                 </div>

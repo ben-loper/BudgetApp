@@ -255,5 +255,10 @@ namespace BudgetBackend.Repos
 
             return _context.MonthlyBills.Where(b => b.MonthlyIncomeId == savedBill.MonthlyIncomeId).ToList();
         }
+
+        public List<Loan> GetLoansByMonthlyIncomeId(int id)
+        {
+            return _context.Loans.Where(l => l.MonthlyIncomeId == id).ToList();
+        }
     }
 }

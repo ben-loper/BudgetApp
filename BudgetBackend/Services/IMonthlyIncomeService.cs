@@ -11,6 +11,7 @@ namespace BudgetBackend.Services
         public List<MonthlyIncomeDto> GetAllMonthlyIncomes();
         public MonthlyIncomeDto GetMonthlyIncome();
         public MonthlyIncomeDto GetMonthlyIncomeById(int id);
+        public List<LoanDto> GetLoansForMonthlyIncome(int id);
         public MonthlyIncomeDto CreateMonthlyIncome(MonthlyIncomeDto monthlyIncome);
         public MonthlyIncomeDto UpdateMonthlyIncome(MonthlyIncomeUpdateDto monthlyIncome);
         public void DeleteMonthlyIncome(MonthlyIncomeDto monthlyIncome);

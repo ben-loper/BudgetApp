@@ -105,5 +105,19 @@ namespace BudgetBackend.Services
 
             _repo.DeleteMonthlyIncome(income);
         }
+
+        public List<LoanDto> GetLoansForMonthlyIncome(int id)
+        {
+            var loans = new List<LoanDto>();
+
+            var savedLoans = _repo.GetLoansByMonthlyIncomeId(id);
+
+            if (savedLoans != null)
+            {
+                loans = _mapper.Map<List<Loan>, List<LoanDto>>(savedLoans);
+            }
+
+            return loans;
+        }
     }
 }

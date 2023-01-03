@@ -60,8 +60,6 @@ namespace BudgetBackend.Entities
 
                 entity.Property(e => e.Id).UseIdentityAlwaysColumn();
 
-                entity.Property(e => e.DayOfMonthDue).HasDefaultValueSql("1");
-
                 entity.Property(e => e.LastPaidDate)
                     .HasColumnType("timestamp without time zone")
                     .HasDefaultValueSql("CURRENT_DATE");

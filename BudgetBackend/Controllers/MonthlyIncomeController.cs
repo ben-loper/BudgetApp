@@ -49,5 +49,11 @@ namespace BudgetBackend.Controllers
 
             return Ok();
         }
+
+        [HttpGet("{monthlyIncomeId:int}/loans")]
+        public List<LoanDto> Get(int monthlyIncomeId)
+        {
+            return _service.GetLoansForMonthlyIncome(monthlyIncomeId);
+        }
     }
 }
